@@ -50,6 +50,7 @@ function displayVis(originalData) {
 
 
         values = [];
+        colours = [];
         max_val = 450;
 
         if (state == 0) {
@@ -61,18 +62,25 @@ function displayVis(originalData) {
                 }
 
                 values.push(new_val)
+                colours.push('rgba(222,45,38,0.8)');
             }
 
         } else if (state == 1) {
             // Level 1 - isolated host
             for (i = 0; i < games.length; i++) {
                 new_val = csvData[host][years[i]];
-                console.log(new_val)
+                // console.log(new_val)
                 if (+new_val > max_val) {
                     max_val = +new_val;
                 }
 
                 values.push(new_val)
+
+                if (host == hosts_ind[i]) {
+                    colours.push("rgba(222,45,38,0.8)")
+                } else {
+                    colours.push("rgba(204,204,204,1)");
+                }
             }
         }
 
@@ -84,6 +92,12 @@ function displayVis(originalData) {
             text: host_labels,
             showscale: true,
             type: "bar",
+            marker:{
+                // color: ['rgba(204,204,204,1)', 'rgba(222,45,38,0.8)', 'rgba(204,204,204,1)', 'rgba(204,204,204,1)', 'rgba(204,204,204,1)']
+                // color: 'rgba(204,204,204,1)',
+                // color: 'rgba(222,45,38,0.8)',
+                color: colours,
+            },
         }
 
         data = [trace];

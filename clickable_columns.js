@@ -1,6 +1,10 @@
+
+
 Plotly.d3.csv("data/host_medals_every_year.csv", displayVis);
 
+
 function displayVis(originalData) {
+    myPlot = document.getElementById("datavis");
     hosts = ['Greece', 'France', 'USA', 'Greece', 'UK', 'Sweden', 'Belgium', 'France', 'Netherlands', 'USA', 'Germany', 'UK', 'Finland', 'Australia', 'Italy', 'Japan', 'Mexico', 'Germany', 'Canada', 'Russia', 'USA', 'South Korea', 'Spain', 'USA', 'Australia', 'Greece', 'China', 'UK', 'Brazil']
     hosts_ind = [8, 6, 18, 8, 17, 16, 1, 6, 12, 18, 7, 17, 5, 0, 9, 10, 11, 7, 3, 13, 18, 14, 15, 18, 0, 8, 4, 17, 2];
     games = ["Athina", "Paris", "St. Louis", "Athina", "London", "Stockholm", "Antwerpen", "Paris", "Amsterdam", "Los Angeles", "Berlin", "London", "Helsinki", "Melbourne", "Roma", "Tokyo", "Mexico City", "Munich", "Montreal", "Moskva", "Los Angeles", "Seoul", "Barcelona", "Atlanta", "Sydney", "Athina", "Beijing", "London", "Rio de Janeiro"];
@@ -31,8 +35,15 @@ function displayVis(originalData) {
     //     }
     // }
 
+    state = 0;
+    host = null;
 
-    function setPlot() {
+
+    function setPlot(this_state, this_host) {
+        // myPlot = document.getElementById("datavis");
+
+        state = this_state;
+        host = this_host;
 
         csvData = originalData;
 
@@ -41,17 +52,33 @@ function displayVis(originalData) {
 
 
         values = [];
-        max_val = 0;
+        max_val = 450;
 
-        // Default - host nation medal tally each year
-        for (i = 0; i < hosts.length; i++) {
-            new_val = csvData[hosts_ind[i]][years[i]];
-            if (+new_val > max_val) {
-                max_val = +new_val;
+        if (state == 0) {
+            // Default - host nation medal tally each year
+            for (i = 0; i < hosts.length; i++) {
+                new_val = csvData[hosts_ind[i]][years[i]];
+                if (+new_val > max_val) {
+                    max_val = +new_val;
+                }
+
+                values.push(new_val)
             }
 
-            values.push(new_val)
+        } else if (state == 1) {
+            // Level 1 - isolated host
+            for (i = 0; i < games.length; i++) {
+                new_val = csvData[host][years[i]];
+                console.log(new_val)
+                if (+new_val > max_val) {
+                    max_val = +new_val;
+                }
+
+                values.push(new_val)
+            }
         }
+
+        console.log(values)
 
         trace = {
             x: gamesYears,
@@ -62,6 +89,7 @@ function displayVis(originalData) {
         }
 
         data = [trace];
+        
         layout = {
             height: 1000,
             xaxis: {
@@ -70,15 +98,16 @@ function displayVis(originalData) {
                 automargin: true,
             },
             yaxis: {
-                range: [0, max_val + 50 - (+max_val % 50)],
+                // range: [0, max_val + 50 - (+max_val % 50)],
+                range: [0, 450],
             },
         };
 
-        Plotly.newPlot("datavis", data, layout);
+        Plotly.newPlot(myPlot, data, layout);
 
     }
 
-    myPlot = document.getElementById("datavis"), setPlot();
+    setPlot(state, host);
 
     // document.getElementById("female").addEventListener("click", function () {
     //     setPlot(n, "F");
@@ -97,13 +126,33 @@ function displayVis(originalData) {
     // });
 
     // setPlot();
+    // var data_update = {
+    //     y: [Math.round(Math.random() * 290), Math.round(Math.random() * 29), Math.round(Math.random() * 290)],
+    // }
 
     myPlot.on('plotly_click', function (data) {
-        var pts = '';
+        console.log("WORKING...");
+
+        new_host = host;
+
         for (var i = 0; i < data.points.length; i++) {
-            pts = 'x = ' + data.points[i].x;
+            new_host = hosts_ind[data.points[i].pointIndex];
         }
-        console.log('Closest point clicked:\n\n', pts);
+
+        if (new_host != host) {
+            console.log("SUCCESS");
+            // Plotly.relayout(myPlot, {
+
+            // })
+            setPlot(1, new_host);
+        }
+        
+
+        // setPlot(1, Math.round(Math.random() * 29));
+        Plotly.update(myPlot);
+
+        console.log("SUCCESS");
+
     });
 
 

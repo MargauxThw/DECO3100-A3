@@ -1,10 +1,8 @@
-
-
 Plotly.d3.csv("data/host_medals_every_year.csv", displayVis);
 
 
 function displayVis(originalData) {
-    myPlot = document.getElementById("datavis");
+    // myPlot = document.getElementById("datavis");
     hosts = ['Greece', 'France', 'USA', 'Greece', 'UK', 'Sweden', 'Belgium', 'France', 'Netherlands', 'USA', 'Germany', 'UK', 'Finland', 'Australia', 'Italy', 'Japan', 'Mexico', 'Germany', 'Canada', 'Russia', 'USA', 'South Korea', 'Spain', 'USA', 'Australia', 'Greece', 'China', 'UK', 'Brazil']
     hosts_ind = [8, 6, 18, 8, 17, 16, 1, 6, 12, 18, 7, 17, 5, 0, 9, 10, 11, 7, 3, 13, 18, 14, 15, 18, 0, 8, 4, 17, 2];
     games = ["Athina", "Paris", "St. Louis", "Athina", "London", "Stockholm", "Antwerpen", "Paris", "Amsterdam", "Los Angeles", "Berlin", "London", "Helsinki", "Melbourne", "Roma", "Tokyo", "Mexico City", "Munich", "Montreal", "Moskva", "Los Angeles", "Seoul", "Barcelona", "Atlanta", "Sydney", "Athina", "Beijing", "London", "Rio de Janeiro"];
@@ -103,21 +101,103 @@ function displayVis(originalData) {
             },
         };
 
-        Plotly.newPlot(myPlot, data, layout);
+        Plotly.newPlot("datavis", data, layout);
 
     }
 
     setPlot(state, host);
+
 
     // document.getElementById("female").addEventListener("click", function () {
     //     setPlot(n, "F");
     //     console.log(n);
     // });
 
-    // document.getElementById("male").addEventListener("click", function () {
-    //     setPlot(n, "M");
-    //     console.log(n);
+    // document.getElementById("all").addEventListener("click", function () {
+    //     setPlot(0, null);
+        
     // });
+
+    document.getElementById("All").addEventListener("click", function () {
+        setPlot(0, 0);
+    });
+
+    document.getElementById("Australia").addEventListener("click", function () {
+        setPlot(1, 0);
+    });
+
+    document.getElementById("Belgium").addEventListener("click", function () {
+        setPlot(1, 1);
+    });
+
+    document.getElementById("Brazil").addEventListener("click", function () {
+        setPlot(1, 2);
+    });
+
+    document.getElementById("Canada").addEventListener("click", function () {
+        setPlot(1, 3);
+    });
+
+    document.getElementById("China").addEventListener("click", function () {
+        setPlot(1, 4);
+    });
+
+    document.getElementById("Finland").addEventListener("click", function () {
+        setPlot(1, 5);
+    });
+
+    document.getElementById("France").addEventListener("click", function () {
+        setPlot(1, 6);
+    });
+
+    document.getElementById("Germany").addEventListener("click", function () {
+        setPlot(1, 7);
+    });
+
+    document.getElementById("Greece").addEventListener("click", function () {
+        setPlot(1, 8);
+    });
+
+    document.getElementById("Italy").addEventListener("click", function () {
+        setPlot(1, 9);
+    });
+
+    document.getElementById("Japan").addEventListener("click", function () {
+        setPlot(1, 10);
+    });
+
+    document.getElementById("Mexico").addEventListener("click", function () {
+        setPlot(1, 11);
+    });
+
+    document.getElementById("Netherlands").addEventListener("click", function () {
+        setPlot(1, 12);
+    });
+
+    document.getElementById("Russia").addEventListener("click", function () {
+        setPlot(1, 13);
+    });
+
+    document.getElementById("South Korea").addEventListener("click", function () {
+        setPlot(1, 14);
+    });
+
+    document.getElementById("Spain").addEventListener("click", function () {
+        setPlot(1, 15);
+    });
+
+    document.getElementById("Sweden").addEventListener("click", function () {
+        setPlot(1, 16);
+    });
+
+    document.getElementById("UK").addEventListener("click", function () {
+        setPlot(1, 17);
+    });
+
+    document.getElementById("USA").addEventListener("click", function () {
+        setPlot(1, 18);
+    });
+
 
     // document.getElementById("number").addEventListener("keydown", function (e) {
     //     if (e.keyCode == 13) {
@@ -130,30 +210,46 @@ function displayVis(originalData) {
     //     y: [Math.round(Math.random() * 290), Math.round(Math.random() * 29), Math.round(Math.random() * 290)],
     // }
 
-    myPlot.on('plotly_click', function (data) {
-        console.log("WORKING...");
+    // myPlot.on('plotly_click', function (data) {
+    //     console.log("WORKING...");
 
-        new_host = host;
+    //     new_host = host;
 
-        for (var i = 0; i < data.points.length; i++) {
-            new_host = hosts_ind[data.points[i].pointIndex];
-        }
+    //     for (var i = 0; i < data.points.length; i++) {
+    //         new_host = hosts_ind[data.points[i].pointIndex];
+    //     }
 
-        if (new_host != host) {
-            console.log("SUCCESS");
-            // Plotly.relayout(myPlot, {
+    //     if (new_host != host) {
+    //         console.log("SUCCESS");
+    //         // Plotly.relayout(myPlot, {
 
-            // })
-            setPlot(1, new_host);
-        }
+    //         // })
+    //         setPlot(1, new_host);
+    //     }
         
 
-        // setPlot(1, Math.round(Math.random() * 29));
-        Plotly.update(myPlot);
+    //     // setPlot(1, Math.round(Math.random() * 29));
+    //     Plotly.update(myPlot);
 
-        console.log("SUCCESS");
+    //     console.log("SUCCESS");
 
-    });
+    // });
+
+    // function testFunction(num) {
+    //     new_host = host;
+
+    //     for (var i = 0; i < data.points.length; i++) {
+    //         new_host = hosts_ind[data.points[i].pointIndex];
+    //     }
+
+    //     if (new_host != host) {
+    //         console.log("SUCCESS");
+    //         setPlot(1, new_host);
+    //     }
+        
+
+    //     // setPlot(1, Math.round(Math.random() * 29));
+    // }
 
 
 }

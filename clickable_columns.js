@@ -54,6 +54,7 @@ function displayVis(originalData) {
         max_val = 450;
 
         if (state == 0) {
+            host_name = "All hosts"
             // Default - host nation medal tally each year
             for (i = 0; i < hosts.length; i++) {
                 new_val = csvData[hosts_ind[i]][years[i]];
@@ -66,6 +67,7 @@ function displayVis(originalData) {
             }
 
         } else if (state == 1) {
+            host_name = csvData[host].Region
             // Level 1 - isolated host
             for (i = 0; i < games.length; i++) {
                 new_val = csvData[host][years[i]];
@@ -103,6 +105,7 @@ function displayVis(originalData) {
         data = [trace];
         
         layout = {
+            title: `Medal tally: ${host_name}`,
             height: 1000,
             xaxis: {
                 ticks: "outside",

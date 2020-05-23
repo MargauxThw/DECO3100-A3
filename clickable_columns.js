@@ -9,7 +9,7 @@ function displayVis(originalData) {
     years = ["1896", "1900", "1904", "1906", "1908", "1912", "1920", "1924", "1928", "1932", "1936", "1948", "1952", "1956", "1960", "1964", "1968", "1972", "1976", "1980", "1984", "1988", "1992", "1996", "2000", "2004", "2008", "2012", "2016"];
     gamesYears = ["Athina, 1896", "Paris, 1900", "St. Louis, 1904", "Athina, 1906", "London, 1908", "Stockholm, 1912", "Antwerpen, 1920", "Paris, 1924", "Amsterdam, 1928", "Los Angeles, 1932", "Berlin, 1936", "London, 1948", "Helsinki, 1952", "Melbourne, 1956", "Roma, 1960", "Tokyo, 1964", "Mexico City, 1968", "Munich, 1972", "Montreal, 1976", "Moskva, 1980", "Los Angeles, 1984", "Seoul, 1988", "Barcelona, 1992", "Atlanta, 1996", "Sydney, 2000", "Athina, 2004", "Beijing, 2008", "London, 2012", "Rio de Janeiro, 2016"];
     host_labels = ["Host nation: Greece", "Host nation: France", "Host nation: USA", "Host nation: Greece", "Host nation: UK", "Host nation: Sweden", "Host nation: Belgium", "Host nation: France", "Host nation: Netherlands", "Host nation: USA", "Host nation: Germany", "Host nation: UK", "Host nation: Finland", "Host nation: Australia", "Host nation: Italy", "Host nation: Japan", "Host nation: Mexico", "Host nation: Germany", "Host nation: Canada", "Host nation: Russia", "Host nation: USA", "Host nation: South Korea", "Host nation: Spain", "Host nation: USA", "Host nation: Australia", "Host nation: Greece", "Host nation: China", "Host nation: UK", "Host nation: Brazil"];
-    sport_append = ["", ",Swimming", ",Athletics"]
+    sport_append = ["", ",Swimming", ",Wrestling", ",Gymnastics", ",Weightlifting", ",Sailing", ",Diving", ",Archery", ",Rowing", ",Cycling", ",Athletics"]
     // gamesYears = [];
     // for (i = 1; i < sYears.length; i++) {
     //     tick = games[i] + ", " + sYears[i];
@@ -59,7 +59,7 @@ function displayVis(originalData) {
 
         values = [];
         colours = [];
-        max_val = 450;
+        max_val = 0;
 
         if (state == 0) {
             host_name = "All hosts"
@@ -94,6 +94,12 @@ function displayVis(originalData) {
             }
         }
 
+        if (sport != 0) {
+            max_cap =  max_val + 50 - (+max_val % 50);
+        } else {
+            max_cap = 450;
+        }
+
         console.log(values)
 
         trace = {
@@ -122,7 +128,7 @@ function displayVis(originalData) {
             },
             yaxis: {
                 // range: [0, max_val + 50 - (+max_val % 50)],
-                range: [0, 450],
+                range: [0, max_cap],
             },
         };
 
@@ -132,16 +138,7 @@ function displayVis(originalData) {
 
     setPlot(state, host, sport);
 
-
-    // document.getElementById("female").addEventListener("click", function () {
-    //     setPlot(n, "F");
-    //     console.log(n);
-    // });
-
-    // document.getElementById("all").addEventListener("click", function () {
-    //     setPlot(0, null);
-        
-    // });
+    /* REGION BUTTONS */
 
     document.getElementById("All-hosts").addEventListener("click", function () {
         setPlot(0, 0, sport);
@@ -223,6 +220,8 @@ function displayVis(originalData) {
         setPlot(1, 18, sport);
     });
 
+    /* EVENT CATEGORY BUTTONS */
+
     document.getElementById("All-sports").addEventListener("click", function () {
         setPlot(state, host, 0);
     });
@@ -231,8 +230,40 @@ function displayVis(originalData) {
         setPlot(state, host, 1);
     });
 
-    document.getElementById("Athletics").addEventListener("click", function () {
+    document.getElementById("Wrestling").addEventListener("click", function () {
         setPlot(state, host, 2);
+    });
+
+    document.getElementById("Gymnastics").addEventListener("click", function () {
+        setPlot(state, host, 3);
+    });
+
+    document.getElementById("Weightlifting").addEventListener("click", function () {
+        setPlot(state, host, 4);
+    });
+
+    document.getElementById("Sailing").addEventListener("click", function () {
+        setPlot(state, host, 5);
+    });
+
+    document.getElementById("Diving").addEventListener("click", function () {
+        setPlot(state, host, 6);
+    });
+    
+    document.getElementById("Archery").addEventListener("click", function () {
+        setPlot(state, host, 7);
+    });
+
+    document.getElementById("Rowing").addEventListener("click", function () {
+        setPlot(state, host, 8);
+    });
+
+    document.getElementById("Cycling").addEventListener("click", function () {
+        setPlot(state, host, 9);
+    });
+    
+    document.getElementById("Athletics").addEventListener("click", function () {
+        setPlot(state, host, 10);
     });
 
 

@@ -1,4 +1,4 @@
-Plotly.d3.csv("data/host_medals_every_year.csv", displayVis);
+Plotly.d3.csv("data/final.csv", displayVis);
 
 function displayVis(csvData) {
     hosts = ['Greece', 'France', 'USA', 'Greece', 'UK', 'Sweden', 'Belgium', 'France', 'Netherlands', 'USA', 'Germany', 'UK', 'Finland', 'Australia', 'Italy', 'Japan', 'Mexico', 'Germany', 'Canada', 'Russia', 'USA', 'South Korea', 'Spain', 'USA', 'Australia', 'Greece', 'China', 'UK', 'Brazil'];
@@ -24,28 +24,82 @@ function displayVis(csvData) {
         colours = [];
         max_cap = 0;
 
-        // Overall host graph
+        // Level 1: Overall host graph
         if (state == 0) {
             x_values = gamesYears;
-            if (mode == 0) {
+            if (mode == 0) { // By country
                 // max_cap = 450;
                 max_cap = 650;
                 for (i = 0; i < hosts.length; i++) {
-                    y_values.push(csvData[hosts_ind[i]][years[i]])
+                    y_values.push(csvData[hosts_ind[i]][years[i]]);
                     colours.push('rgba(222,45,38,0.8)');
                 }
-            } else {
+            } else { // By region
                 max_cap = 650;
                 for (i = 0; i < hosts.length; i++) {
-                    y_values.push(csvData[20 + host_regions[i]][years[i]])
+                    y_values.push(csvData[20 + host_regions[i]][years[i]]);
                     colours.push('rgba(222,45,38,0.8)');
                 }
-            }            
+            }
         }
 
+        // Level 2: Yearly split of isolated host nation/region
         if (state == 1) {
             x_values = gamesYears;
+            if (mode == 0) { // By country
+                for (i = 0; i < games.length; i++) {    
+                    y_values.push(csvData[host][years[i]]);
+    
+                    if (host == hosts_ind[i]) {
+                        colours.push("rgba(222,45,38,0.8)");
+                    } else {
+                        colours.push("rgba(204,204,204,1)");
+                    }
+                }
+            } else { // By region
+                for (i = 0; i < games.length; i++) {    
+                    y_values.push(csvData[20 + host_regions[i]][years[i]]);
+    
+                    if (host == hosts_regions[i]) {
+                        colours.push("rgba(222,45,38,0.8)");
+                    } else {
+                        colours.push("rgba(204,204,204,1)");
+                    }
+                }
+            }
 
+        }
+
+        // Level 3: Focus on one games - showing each region/top country's performance
+        if (state == 2) {
+            if (mode == 0) { // By country
+                max_cap = 450;
+                participating = csvData.slice(30);
+                participating.sort((b, a) => a[years[game]] - b[years[game]]);
+                participating = participating.slice(0, 10);
+                x_values = participating.map((row) => row.Region);
+                y_values = participating.map((row) => row[years[game]]);
+                for (i = 0; i < participating.length; i++) {
+                    if (participating[i].Region === hosts[game]) {
+                        colours.push('rgba(222,45,38,0.8)');
+                    } else {
+                        colours.push('rgba(204,204,204,1)');
+                    }
+                }
+
+
+            } else { // By region
+                x_values = regions;
+                max_cap = 650;
+                for (i = 0; i < regions.length; i++) {
+                    values.push(csvData[20 + i][years[game]]);
+                    if (i == host_regions[game]) {
+                        colours.push('rgba(222,45,38,0.8)');
+                    } else {
+                        colours.push('rgba(204,204,204,1)');
+                    }
+                }
+            }
         }
 
         trace = {
@@ -87,6 +141,7 @@ function displayVis(csvData) {
 
     document.getElementById("nation").addEventListener("click", function () {
         setPlot(0, state, host, game);
+        // setPlot(0, 2, host, 0);
     });
 
     document.getElementById("region").addEventListener("click", function () {

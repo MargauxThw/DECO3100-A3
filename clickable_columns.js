@@ -106,6 +106,7 @@ function displayVis(originalData) {
         console.log(values)
 
         main_trace = {
+            name: "",
             x: gamesYears,
             y: values,
             text: host_labels,
@@ -119,9 +120,10 @@ function displayVis(originalData) {
         }
 
         comp_trace = {
+            name: "",
             x: gamesYears,
             y: comp_values,
-            text: host_labels,
+            text: "Total medals on offer",
             type: "bar",
             marker:{
                 // color: ['rgba(204,204,204,1)', 'rgba(222,45,38,0.8)', 'rgba(204,204,204,1)', 'rgba(204,204,204,1)', 'rgba(204,204,204,1)']

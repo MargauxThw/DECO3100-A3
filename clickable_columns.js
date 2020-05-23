@@ -2,7 +2,6 @@ Plotly.d3.csv("data/host_medals_every_year.csv", displayVis);
 
 
 function displayVis(originalData) {
-    // myPlot = document.getElementById("datavis");
     hosts = ['Greece', 'France', 'USA', 'Greece', 'UK', 'Sweden', 'Belgium', 'France', 'Netherlands', 'USA', 'Germany', 'UK', 'Finland', 'Australia', 'Italy', 'Japan', 'Mexico', 'Germany', 'Canada', 'Russia', 'USA', 'South Korea', 'Spain', 'USA', 'Australia', 'Greece', 'China', 'UK', 'Brazil']
     hosts_ind = [8, 6, 18, 8, 17, 16, 1, 6, 12, 18, 7, 17, 5, 0, 9, 10, 11, 7, 3, 13, 18, 14, 15, 18, 0, 8, 4, 17, 2];
     games = ["Athina", "Paris", "St. Louis", "Athina", "London", "Stockholm", "Antwerpen", "Paris", "Amsterdam", "Los Angeles", "Berlin", "London", "Helsinki", "Melbourne", "Roma", "Tokyo", "Mexico City", "Munich", "Montreal", "Moskva", "Los Angeles", "Seoul", "Barcelona", "Atlanta", "Sydney", "Athina", "Beijing", "London", "Rio de Janeiro"];
@@ -36,19 +35,17 @@ function displayVis(originalData) {
     state = 0;
     host = null;
     sport = 0;
+    comp = 1;
 
 
-    function setPlot(this_state, this_host, this_sport) {
-        // myPlot = document.getElementById("datavis");
+    function setPlot(this_state, this_host, this_sport, this_comp) {
 
         state = this_state;
         host = this_host;
         sport = this_sport;
+        comp = this_comp;
 
         csvData = originalData;
-
-        // csvData.sort((a, b) => a[index] - b[index]);
-        // console.log(csvData);
 
         if (sport == 0) {
             sport_name = "All events"
@@ -58,6 +55,7 @@ function displayVis(originalData) {
 
 
         values = [];
+        comp_values = [];
         colours = [];
         max_val = 0;
 
@@ -66,11 +64,13 @@ function displayVis(originalData) {
             // Default - host nation medal tally each year
             for (i = 0; i < hosts.length; i++) {
                 new_val = csvData[hosts_ind[i]][years[i] + sport_append[sport]];
+                new_comp = csvData[19][years[i] + sport_append[sport]];
                 if (+new_val > max_val) {
                     max_val = +new_val;
                 }
 
                 values.push(new_val)
+                comp_values.push(new_comp)
                 colours.push('rgba(222,45,38,0.8)');
             }
 
@@ -79,12 +79,14 @@ function displayVis(originalData) {
             // Level 1 - isolated host
             for (i = 0; i < games.length; i++) {
                 new_val = csvData[host][years[i] + sport_append[sport]];
+                new_comp = csvData[19][years[i] + sport_append[sport]];
                 // console.log(new_val)
                 if (+new_val > max_val) {
                     max_val = +new_val;
                 }
 
                 values.push(new_val)
+                comp_values.push(new_comp)
 
                 if (host == hosts_ind[i]) {
                     colours.push("rgba(222,45,38,0.8)")
@@ -95,18 +97,18 @@ function displayVis(originalData) {
         }
 
         if (sport != 0) {
-            max_cap =  max_val + 50 - (+max_val % 50);
+            // max_cap =  max_val + 50 - (+max_val % 50);
+            max_cap = 80;
         } else {
             max_cap = 450;
         }
 
         console.log(values)
 
-        trace = {
+        main_trace = {
             x: gamesYears,
             y: values,
             text: host_labels,
-            showscale: true,
             type: "bar",
             marker:{
                 // color: ['rgba(204,204,204,1)', 'rgba(222,45,38,0.8)', 'rgba(204,204,204,1)', 'rgba(204,204,204,1)', 'rgba(204,204,204,1)']
@@ -116,10 +118,35 @@ function displayVis(originalData) {
             },
         }
 
-        data = [trace];
+        comp_trace = {
+            x: gamesYears,
+            y: comp_values,
+            text: host_labels,
+            type: "bar",
+            marker:{
+                // color: ['rgba(204,204,204,1)', 'rgba(222,45,38,0.8)', 'rgba(204,204,204,1)', 'rgba(204,204,204,1)', 'rgba(204,204,204,1)']
+                // color: 'rgba(204,204,204,1)',
+                // color: 'rgba(222,45,38,0.8)',
+                // color: colours,
+                color: "black",
+            },
+        }
+
+        if (comp == 1) {
+            if (sport != 0) {
+                max_cap = 220;
+            } else {
+                max_cap = 1500;
+            }
+            data = [main_trace, comp_trace];
+        } else {
+            data = [main_trace];
+        }
+
         
         layout = {
             title: `Medal tally: ${host_name}, ${sport_name}`,
+            showlegend: false,
             height: 1000,
             xaxis: {
                 ticks: "outside",
@@ -136,134 +163,144 @@ function displayVis(originalData) {
 
     }
 
-    setPlot(state, host, sport);
+    setPlot(state, host, sport, comp);
+
+    /* TOGGLE COMPARISON TRACE */
+
+    document.getElementById("toggle-comp").addEventListener("click", function () {
+        if (comp == 0) {
+            setPlot(state, host, sport, 1);
+        } else {
+            setPlot(state, host, sport, 0);
+        }
+    });
 
     /* REGION BUTTONS */
 
     document.getElementById("All-hosts").addEventListener("click", function () {
-        setPlot(0, 0, sport);
+        setPlot(0, 0, sport, comp);
     });
 
     document.getElementById("Australia").addEventListener("click", function () {
-        setPlot(1, 0, sport);
+        setPlot(1, 0, sport, comp);
     });
 
     document.getElementById("Belgium").addEventListener("click", function () {
-        setPlot(1, 1, sport);
+        setPlot(1, 1, sport, comp);
     });
 
     document.getElementById("Brazil").addEventListener("click", function () {
-        setPlot(1, 2, sport);
+        setPlot(1, 2, sport, comp);
     });
 
     document.getElementById("Canada").addEventListener("click", function () {
-        setPlot(1, 3, sport);
+        setPlot(1, 3, sport, comp);
     });
 
     document.getElementById("China").addEventListener("click", function () {
-        setPlot(1, 4, sport);
+        setPlot(1, 4, sport, comp);
     });
 
     document.getElementById("Finland").addEventListener("click", function () {
-        setPlot(1, 5, sport);
+        setPlot(1, 5, sport, comp);
     });
 
     document.getElementById("France").addEventListener("click", function () {
-        setPlot(1, 6, sport);
+        setPlot(1, 6, sport, comp);
     });
 
     document.getElementById("Germany").addEventListener("click", function () {
-        setPlot(1, 7, sport);
+        setPlot(1, 7, sport, comp);
     });
 
     document.getElementById("Greece").addEventListener("click", function () {
-        setPlot(1, 8, sport);
+        setPlot(1, 8, sport, comp);
     });
 
     document.getElementById("Italy").addEventListener("click", function () {
-        setPlot(1, 9, sport);
+        setPlot(1, 9, sport, comp);
     });
 
     document.getElementById("Japan").addEventListener("click", function () {
-        setPlot(1, 10, sport);
+        setPlot(1, 10, sport, comp);
     });
 
     document.getElementById("Mexico").addEventListener("click", function () {
-        setPlot(1, 11, sport);
+        setPlot(1, 11, sport, comp);
     });
 
     document.getElementById("Netherlands").addEventListener("click", function () {
-        setPlot(1, 12, sport);
+        setPlot(1, 12, sport, comp);
     });
 
     document.getElementById("Russia").addEventListener("click", function () {
-        setPlot(1, 13, sport);
+        setPlot(1, 13, sport, comp);
     });
 
     document.getElementById("South Korea").addEventListener("click", function () {
-        setPlot(1, 14, sport);
+        setPlot(1, 14, sport, comp);
     });
 
     document.getElementById("Spain").addEventListener("click", function () {
-        setPlot(1, 15, sport);
+        setPlot(1, 15, sport, comp);
     });
 
     document.getElementById("Sweden").addEventListener("click", function () {
-        setPlot(1, 16, sport);
+        setPlot(1, 16, sport, comp);
     });
 
     document.getElementById("UK").addEventListener("click", function () {
-        setPlot(1, 17, sport);
+        setPlot(1, 17, sport, comp);
     });
 
     document.getElementById("USA").addEventListener("click", function () {
-        setPlot(1, 18, sport);
+        setPlot(1, 18, sport, comp);
     });
 
     /* EVENT CATEGORY BUTTONS */
 
     document.getElementById("All-sports").addEventListener("click", function () {
-        setPlot(state, host, 0);
+        setPlot(state, host, 0, comp);
     });
 
     document.getElementById("Swimming").addEventListener("click", function () {
-        setPlot(state, host, 1);
+        setPlot(state, host, 1, comp);
     });
 
     document.getElementById("Wrestling").addEventListener("click", function () {
-        setPlot(state, host, 2);
+        setPlot(state, host, 2, comp);
     });
 
     document.getElementById("Gymnastics").addEventListener("click", function () {
-        setPlot(state, host, 3);
+        setPlot(state, host, 3, comp);
     });
 
     document.getElementById("Weightlifting").addEventListener("click", function () {
-        setPlot(state, host, 4);
+        setPlot(state, host, 4, comp);
     });
 
     document.getElementById("Sailing").addEventListener("click", function () {
-        setPlot(state, host, 5);
+        setPlot(state, host, 5, comp);
     });
 
     document.getElementById("Diving").addEventListener("click", function () {
-        setPlot(state, host, 6);
+        setPlot(state, host, 6, comp);
     });
     
     document.getElementById("Archery").addEventListener("click", function () {
-        setPlot(state, host, 7);
+        setPlot(state, host, 7, comp);
     });
 
     document.getElementById("Rowing").addEventListener("click", function () {
-        setPlot(state, host, 8);
+        setPlot(state, host, 8, comp);
     });
 
     document.getElementById("Cycling").addEventListener("click", function () {
-        setPlot(state, host, 9);
+        setPlot(state, host, 9, comp);
     });
     
     document.getElementById("Athletics").addEventListener("click", function () {
-        setPlot(state, host, 10);
+        setPlot(state, host, 10, comp);
     });
 
 

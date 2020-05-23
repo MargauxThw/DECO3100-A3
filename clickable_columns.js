@@ -1,6 +1,5 @@
 Plotly.d3.csv("data/host_medals_every_year.csv", displayVis);
 
-
 function displayVis(originalData) {
     hosts = ['Greece', 'France', 'USA', 'Greece', 'UK', 'Sweden', 'Belgium', 'France', 'Netherlands', 'USA', 'Germany', 'UK', 'Finland', 'Australia', 'Italy', 'Japan', 'Mexico', 'Germany', 'Canada', 'Russia', 'USA', 'South Korea', 'Spain', 'USA', 'Australia', 'Greece', 'China', 'UK', 'Brazil']
     hosts_ind = [8, 6, 18, 8, 17, 16, 1, 6, 12, 18, 7, 17, 5, 0, 9, 10, 11, 7, 3, 13, 18, 14, 15, 18, 0, 8, 4, 17, 2];
@@ -9,6 +8,8 @@ function displayVis(originalData) {
     gamesYears = ["Athina, 1896", "Paris, 1900", "St. Louis, 1904", "Athina, 1906", "London, 1908", "Stockholm, 1912", "Antwerpen, 1920", "Paris, 1924", "Amsterdam, 1928", "Los Angeles, 1932", "Berlin, 1936", "London, 1948", "Helsinki, 1952", "Melbourne, 1956", "Roma, 1960", "Tokyo, 1964", "Mexico City, 1968", "Munich, 1972", "Montreal, 1976", "Moskva, 1980", "Los Angeles, 1984", "Seoul, 1988", "Barcelona, 1992", "Atlanta, 1996", "Sydney, 2000", "Athina, 2004", "Beijing, 2008", "London, 2012", "Rio de Janeiro, 2016"];
     host_labels = ["Host nation: Greece", "Host nation: France", "Host nation: USA", "Host nation: Greece", "Host nation: UK", "Host nation: Sweden", "Host nation: Belgium", "Host nation: France", "Host nation: Netherlands", "Host nation: USA", "Host nation: Germany", "Host nation: UK", "Host nation: Finland", "Host nation: Australia", "Host nation: Italy", "Host nation: Japan", "Host nation: Mexico", "Host nation: Germany", "Host nation: Canada", "Host nation: Russia", "Host nation: USA", "Host nation: South Korea", "Host nation: Spain", "Host nation: USA", "Host nation: Australia", "Host nation: Greece", "Host nation: China", "Host nation: UK", "Host nation: Brazil"];
     sport_append = ["", ",Swimming", ",Wrestling", ",Gymnastics", ",Weightlifting", ",Sailing", ",Diving", ",Archery", ",Rowing", ",Cycling", ",Athletics"]
+    regions = ["Individual Olympic Athletes", "Africa", "Asia", "Eastern Europe", "Middle East", "North America", "Northern Europe", "Oceania", "South America", "Western Europe"]
+    host_regions = [9, 9, 5, 9, 9, 6, 9, 9, 9, 5, 9, 9, 6, 7, 9, 2, 5, 9, 5, 3, 5, 2, 9, 5, 7, 9, 2, 9, 8]
     // gamesYears = [];
     // for (i = 1; i < sYears.length; i++) {
     //     tick = games[i] + ", " + sYears[i];
@@ -35,147 +36,199 @@ function displayVis(originalData) {
     state = 0;
     host = null;
     sport = 0;
-    comp = 1;
+    comp = 0;
+    mode = 1;
+    year = 0;
 
 
-    function setPlot(this_state, this_host, this_sport, this_comp) {
-
+    function setPlot(this_state, this_host, this_sport, this_comp, this_mode, this_year) {
         state = this_state;
         host = this_host;
         sport = this_sport;
         comp = this_comp;
+        mode = this_mode;
+        year = this_year;
 
         csvData = originalData;
 
-        if (sport == 0) {
-            sport_name = "All events"
-        } else {
-            sport_name = sport_append[sport].substr(1)
-        }
+        if (mode == 0) {
 
-
-        values = [];
-        comp_values = [];
-        colours = [];
-        max_val = 0;
-
-        if (state == 0) {
-            host_name = "All hosts"
-            // Default - host nation medal tally each year
-            for (i = 0; i < hosts.length; i++) {
-                new_val = csvData[hosts_ind[i]][years[i] + sport_append[sport]];
-                new_comp = csvData[19][years[i] + sport_append[sport]];
-                if (+new_val > max_val) {
-                    max_val = +new_val;
-                }
-
-                values.push(new_val)
-                comp_values.push(new_comp)
-                colours.push('rgba(222,45,38,0.8)');
-            }
-
-        } else if (state == 1) {
-            host_name = csvData[host].Region
-            // Level 1 - isolated host
-            for (i = 0; i < games.length; i++) {
-                new_val = csvData[host][years[i] + sport_append[sport]];
-                new_comp = csvData[19][years[i] + sport_append[sport]];
-                // console.log(new_val)
-                if (+new_val > max_val) {
-                    max_val = +new_val;
-                }
-
-                values.push(new_val)
-                comp_values.push(new_comp)
-
-                if (host == hosts_ind[i]) {
-                    colours.push("rgba(222,45,38,0.8)")
-                } else {
-                    colours.push("rgba(204,204,204,1)");
-                }
-            }
-        }
-
-        if (sport != 0) {
-            // max_cap =  max_val + 50 - (+max_val % 50);
-            max_cap = 80;
-        } else {
-            max_cap = 450;
-        }
-
-        console.log(values)
-
-        main_trace = {
-            name: "",
-            x: gamesYears,
-            y: values,
-            text: host_labels,
-            type: "bar",
-            marker:{
-                // color: ['rgba(204,204,204,1)', 'rgba(222,45,38,0.8)', 'rgba(204,204,204,1)', 'rgba(204,204,204,1)', 'rgba(204,204,204,1)']
-                // color: 'rgba(204,204,204,1)',
-                // color: 'rgba(222,45,38,0.8)',
-                color: colours,
-            },
-        }
-
-        comp_trace = {
-            name: "",
-            x: gamesYears,
-            y: comp_values,
-            text: "Total medals on offer",
-            type: "bar",
-            marker:{
-                // color: ['rgba(204,204,204,1)', 'rgba(222,45,38,0.8)', 'rgba(204,204,204,1)', 'rgba(204,204,204,1)', 'rgba(204,204,204,1)']
-                // color: 'rgba(204,204,204,1)',
-                // color: 'rgba(222,45,38,0.8)',
-                // color: colours,
-                color: "black",
-            },
-        }
-
-        if (comp == 1) {
-            if (sport != 0) {
-                max_cap = 220;
+            if (sport == 0) {
+                sport_name = "All events"
             } else {
-                max_cap = 1500;
+                sport_name = sport_append[sport].substr(1)
             }
-            data = [main_trace, comp_trace];
-        } else {
-            data = [main_trace];
-        }
 
-        
-        layout = {
-            title: `Medal tally: ${host_name}, ${sport_name}`,
-            showlegend: false,
-            height: 1000,
-            xaxis: {
-                ticks: "outside",
-                tickangle: -45,
-                automargin: true,
-            },
-            yaxis: {
-                // range: [0, max_val + 50 - (+max_val % 50)],
-                range: [0, max_cap],
-            },
-        };
+
+            values = [];
+            comp_values = [];
+            colours = [];
+            max_val = 0;
+
+            if (state == 0) {
+                host_name = "All hosts"
+                // Default - host nation medal tally each year
+                for (i = 0; i < hosts.length; i++) {
+                    new_val = csvData[hosts_ind[i]][years[i] + sport_append[sport]];
+                    new_comp = csvData[19][years[i] + sport_append[sport]];
+                    if (+new_val > max_val) {
+                        max_val = +new_val;
+                    }
+
+                    values.push(new_val)
+                    comp_values.push(new_comp)
+                    colours.push('rgba(222,45,38,0.8)');
+                }
+
+            } else if (state == 1) {
+                host_name = csvData[host].Region
+                // Level 1 - isolated host
+                for (i = 0; i < games.length; i++) {
+                    new_val = csvData[host][years[i] + sport_append[sport]];
+                    new_comp = csvData[19][years[i] + sport_append[sport]];
+                    if (+new_val > max_val) {
+                        max_val = +new_val;
+                    }
+
+                    values.push(new_val)
+                    comp_values.push(new_comp)
+
+                    if (host == hosts_ind[i]) {
+                        colours.push("rgba(222,45,38,0.8)")
+                    } else {
+                        colours.push("rgba(204,204,204,1)");
+                    }
+                }
+            }
+
+            if (sport != 0) {
+                // max_cap =  max_val + 50 - (+max_val % 50);
+                max_cap = 80;
+            } else {
+                max_cap = 450;
+            }
+
+            main_trace = {
+                name: "",
+                x: gamesYears,
+                y: values,
+                text: host_labels,
+                type: "bar",
+                marker: {
+                    // color: ['rgba(204,204,204,1)', 'rgba(222,45,38,0.8)', 'rgba(204,204,204,1)', 'rgba(204,204,204,1)', 'rgba(204,204,204,1)']
+                    // color: 'rgba(204,204,204,1)',
+                    // color: 'rgba(222,45,38,0.8)',
+                    color: colours,
+                },
+            }
+
+            comp_trace = {
+                name: "",
+                x: gamesYears,
+                y: comp_values,
+                text: "Total medals on offer",
+                type: "bar",
+                marker: {
+                    color: "black",
+                },
+            }
+
+            if (comp == 1) {
+                if (sport != 0) {
+                    max_cap = 220;
+                } else {
+                    max_cap = 2050;
+                }
+                data = [main_trace, comp_trace];
+            } else {
+                data = [main_trace];
+            }
+
+
+            layout = {
+                title: `Medal tally: ${host_name}, ${sport_name}`,
+                showlegend: false,
+                hovermode: "closest",
+                hoverlabel: {
+                    bordercolor: "white",
+                },
+                height: 1000,
+                xaxis: {
+                    ticks: "outside",
+                    tickangle: -45,
+                    automargin: true,
+                },
+                yaxis: {
+                    // range: [0, max_val + 50 - (+max_val % 50)],
+                    range: [0, max_cap],
+                },
+            };
+
+        } else {
+            values = [];
+            colours = [];
+
+            for (i = 0; i < regions.length; i++) {
+                new_val = csvData[20 + i][years[year]];
+                values.push(new_val);
+                // console.log(host_region)
+                if (i == host_regions[year]) {
+                    colours.push('rgba(222,45,38,0.8)');
+                } else {
+                    colours.push('rgba(204,204,204,1)');
+                }
+            }
+
+            main_trace = {
+                name: "",
+                x: regions,
+                y: values,
+                type: "bar",
+                marker: {
+                    // color: ['rgba(204,204,204,1)', 'rgba(222,45,38,0.8)', 'rgba(204,204,204,1)', 'rgba(204,204,204,1)', 'rgba(204,204,204,1)']
+                    // color: 'rgba(204,204,204,1)',
+                    // color: 'rgba(222,45,38,0.8)',
+                    color: colours,
+                },
+            }
+
+            data = [main_trace];
+
+            layout = {
+                title: `Medal tally by region:  ${gamesYears[year]}`,
+                showlegend: false,
+                hovermode: "closest",
+                hoverlabel: {
+                    bordercolor: "white",
+                },
+                height: 1000,
+                xaxis: {
+                    ticks: "outside",
+                    tickangle: -45,
+                    automargin: true,
+                },
+                yaxis: {
+                    // range: [0, max_val + 50 - (+max_val % 50)],
+                    range: [0, 650],
+                },
+            };
+        }
 
         Plotly.newPlot("datavis", data, layout);
 
     }
 
-    setPlot(state, host, sport, comp);
+    setPlot(state, host, sport, comp, mode, year);
 
     /* TOGGLE COMPARISON TRACE */
 
-    document.getElementById("toggle-comp").addEventListener("click", function () {
-        if (comp == 0) {
-            setPlot(state, host, sport, 1);
-        } else {
-            setPlot(state, host, sport, 0);
-        }
-    });
+    // document.getElementById("toggle-comp").addEventListener("click", function () {
+    //     if (comp == 0) {
+    //         setPlot(state, host, sport, 1);
+    //     } else {
+    //         setPlot(state, host, sport, 0);
+    //     }
+    // });
 
     /* REGION BUTTONS */
 
@@ -288,7 +341,7 @@ function displayVis(originalData) {
     document.getElementById("Diving").addEventListener("click", function () {
         setPlot(state, host, 6, comp);
     });
-    
+
     document.getElementById("Archery").addEventListener("click", function () {
         setPlot(state, host, 7, comp);
     });
@@ -300,7 +353,7 @@ function displayVis(originalData) {
     document.getElementById("Cycling").addEventListener("click", function () {
         setPlot(state, host, 9, comp);
     });
-    
+
     document.getElementById("Athletics").addEventListener("click", function () {
         setPlot(state, host, 10, comp);
     });
@@ -317,28 +370,12 @@ function displayVis(originalData) {
     //     y: [Math.round(Math.random() * 290), Math.round(Math.random() * 29), Math.round(Math.random() * 290)],
     // }
 
-    // myPlot.on('plotly_click', function (data) {
-    //     console.log("WORKING...");
-
-    //     new_host = host;
-
+    //myPlot.on('plotly_click', function (data) {
     //     for (var i = 0; i < data.points.length; i++) {
     //         new_host = hosts_ind[data.points[i].pointIndex];
     //     }
 
-    //     if (new_host != host) {
-    //         console.log("SUCCESS");
-    //         // Plotly.relayout(myPlot, {
-
-    //         // })
-    //         setPlot(1, new_host);
-    //     }
-        
-
-    //     // setPlot(1, Math.round(Math.random() * 29));
-    //     Plotly.update(myPlot);
-
-    //     console.log("SUCCESS");
+    //     console.log(new_host);
 
     // });
 
@@ -353,7 +390,7 @@ function displayVis(originalData) {
     //         console.log("SUCCESS");
     //         setPlot(1, new_host);
     //     }
-        
+
 
     //     // setPlot(1, Math.round(Math.random() * 29));
     // }

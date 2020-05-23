@@ -1,41 +1,147 @@
-/* Dropdown Button */
-.dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
+html {
+    font-family: "Cabin", sans-serif;
+}
+
+body {
+    padding: 0 2rem;
+    margin-top: 0;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.heading-1 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 4rem;
+    text-transform: uppercase;
+    flex: 6;
+}
+
+.subheading-1 {
+    font-style: normal;
+    font-weight: 500;
+    margin-top: 3.1em;
+    flex: 7;
+}
+
+header {
+    display: flex;
+    margin-bottom: -1rem;
+}
+
+.heading-2 {
+    margin-top: 1.5rem;
+    font-style: bold;
+    font-weight: bolder;
     font-size: 16px;
+    text-align: left;
+}
+
+.first-two {
+    text-align: center;
+}
+
+form {
+    display: inline-flex;
+    /* margin: 0 auto;
+     */
+    /* justify-items: right; */
+    /* width: 100%; */
+}
+
+/* #type-select {
+    flex: 1;
+}
+#story-select {
+    flex: 1;
+} */
+
+/* .first-two{ width: 100%; text-align:justify; display:flex; flex-direction:column; align-items:center; justify-content:center; } */
+
+fieldset {
+    /* flex: 0;
+    align-items: center; */
+    justify-content: space-around;
     border: none;
-  }
-  
-  /* The container <div> - needed to position the dropdown content */
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
-  /* Dropdown Content (Hidden by Default) */
-  .dropdown-content {
+    /* width: 12rem; */
+    /* margin: 0 10rem; */
+
+}
+
+.chip {
+    /* display: flex; */
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    padding: 0.5rem;
+    margin: .5rem .5rem;
+    box-sizing: border-box;
+    border-radius: 3rem;
+    height: 2.5rem;
+    font-size: 1rem;
+    transition: 150ms;
+    width: 10rem;
+}
+
+.chip--blue {
+    background: rgba(0, 129, 200, 0.12);
+    border: 1px solid #0081c8;
+}
+
+.chip--green {
+    background: rgba(0, 166, 81, 0.12);
+    border: 1px solid #00A651;
+}
+
+.chip--yellow {
+    background: rgba(252, 177, 49, 0.12);
+    border: 1px solid #FCB131;
+}
+
+input[type="radio"] {
     display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-  
-  /* Links inside the dropdown */
-  .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-  
-  /* Change color of dropdown links on hover */
-  .dropdown-content a:hover {background-color: #ddd;}
-  
-  /* Show the dropdown menu on hover */
-  .dropdown:hover .dropdown-content {display: block;}
-  
-  /* Change the background color of the dropdown button when the dropdown content is shown */
-  .dropdown:hover .dropbtn {background-color: #3e8e41;}
+}
+
+input[type="radio"]:checked+.chip {
+    background: #0081c8;
+    color: #fff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+input[type="radio"]:hover+.chip {
+    background: #0081c8;
+    color: #fff;
+}
+
+input[type="radio"]:hover+.chip--yellow {
+    background: #FCB131;
+    color: #000;
+}
+
+input[type="radio"]:checked+.chip--yellow {
+    background: #FCB131;
+    color: #000;
+}
+
+input[type="radio"]:hover+.chip--green {
+    background: #00A651;
+    color: #fff;
+}
+
+input[type="radio"]:checked+.chip--green {
+    background: #00A651;
+    color: #fff;
+}
+
+select {
+    font-family: "Cabin";
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    padding: .5rem;
+    margin: 1rem .5rem;
+    border-radius: 3rem;
+}

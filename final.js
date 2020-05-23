@@ -79,6 +79,7 @@ function displayVis(csvData) {
                 participating = participating.slice(0, 10);
                 x_values = participating.map((row) => row.Region);
                 y_values = participating.map((row) => row[years[game]]);
+
                 for (i = 0; i < participating.length; i++) {
                     if (participating[i].Region === hosts[game]) {
                         colours.push('rgba(222,45,38,0.8)');
@@ -137,7 +138,7 @@ function displayVis(csvData) {
 
     }
 
-    // setPlot(1, 0, 0, 0);
+    setPlot(1, 0, 0, 0);
 
     document.getElementById("nation").addEventListener("click", function () {
         setPlot(0, state, host, game);

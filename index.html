@@ -8,7 +8,7 @@
     <title>DECO3100</title>
     <script src="plotly-latest.min.js"></script>
     <script src="final.js"></script>
-    <link rel="stylesheet" type="text/css" href="dropdown.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
 
 
 </head>
@@ -22,8 +22,7 @@
     </header>
 
     <hr>
-    <!-- <div id="vis"> -->
-    <!-- <div id="forms"> -->
+
     <div class="first-two">
         <form class="form-inline">
             <legend class="heading-2">Select host type:</legend>
@@ -58,28 +57,27 @@
     <div id="title-2-nation">
         <h2>How did hosting affect </h2>
         <form>
-            <!-- <label for="nations_select" class="heading-2">By host - nations</label> -->
             <select name="nations_select" id="nations-select">
-                <option value="aus">Australia</option>
-                <option value="amn">Belgium</option>
-                <option value="ams">Brazil</option>
-                <option value="asi">Canada</option>
-                <option value="eun">China</option>
-                <option value="eue">Finland</option>
-                <option value="euw">France</option>
-                <option value="oce">Germany</option>
-                <option value="mid">Greece</option>
-                <option value="ioa">Italy</option>
-                <option value="ioa">Japan</option>
-                <option value="ioa">Italy</option>
-                <option value="ioa">Mexico</option>
-                <option value="ioa">Netherlands</option>
-                <option value="ioa">Russia</option>
-                <option value="ioa">South Korea</option>
-                <option value="ioa">Spain</option>
-                <option value="ioa">Sweden</option>
-                <option value="ioa">UK</option>
-                <option value="ioa">USA</option>
+                <option value="Australia">Australia</option>
+                <option value="Belgium">Belgium</option>
+                <option value="Brazil">Brazil</option>
+                <option value="Canada">Canada</option>
+                <option value="Chine">China</option>
+                <option value="Finland">Finland</option>
+                <option value="France">France</option>
+                <option value="Germany">Germany</option>
+                <option value="Greece">Greece</option>
+                <option value="Italy">Italy</option>
+                <option value="Japan">Japan</option>
+                <option value="Italy">Italy</option>
+                <option value="Mexico">Mexico</option>
+                <option value="Netherlands">Netherlands</option>
+                <option value="Russia">Russia</option>
+                <option value="South Korea">South Korea</option>
+                <option value="Spain">Spain</option>
+                <option value="Sweden">Sweden</option>
+                <option value="UK">UK</option>
+                <option value="USA">USA</option>
             </select>
         </form>
         <h2>'s medal tally?</h2>
@@ -90,15 +88,15 @@
         <form>
             <select name="regions_select" id="regions_select">
                 <option value="afr">Africa</option>
-                <option value="amn">North America</option>
-                <option value="ams">South America</option>
-                <option value="asi">Asia</option>
-                <option value="eun">Northern Europe</option>
-                <option value="eue">Eastern Europe</option>
-                <option value="euw">Western Europe</option>
-                <option value="oce">Oceania</option>
-                <option value="mid">Middle East</option>
-                <option value="ioa">Individual Olympic Athletes</option>
+                <option value="na">North America</option>
+                <option value="sa">South America</option>
+                <option value="as">Asia</option>
+                <option value="ne">Northern Europe</option>
+                <option value="ee">Eastern Europe</option>
+                <option value="we">Western Europe</option>
+                <option value="oc">Oceania</option>
+                <option value="me">Middle East</option>
+                <option value="io">Individual Olympic Athletes</option>
             </select>
         </form>
         <h2>'s medal tally?</h2>
@@ -145,137 +143,8 @@
         <h2> Olympic Games?</h2>
     </div>
 
-
-    <!-- <form>
-        <label for="nations_select" class="heading-2">By host - nations</label>
-        <select name="nations_select" id="nations_select">
-            <option value="aus">Australia</option>
-            <option value="amn">Belgium</option>
-            <option value="ams">Brazil</option>
-            <option value="asi">Canada</option>
-            <option value="eun">China</option>
-            <option value="eue">Finland</option>
-            <option value="euw">France</option>
-            <option value="oce">Germany</option>
-            <option value="mid">Greece</option>
-            <option value="ioa">Italy</option>
-            <option value="ioa">Japan</option>
-            <option value="ioa">Italy</option>
-            <option value="ioa">Mexico</option>
-            <option value="ioa">Netherlands</option>
-            <option value="ioa">Russia</option>
-            <option value="ioa">South Korea</option>
-            <option value="ioa">Spain</option>
-            <option value="ioa">Sweden</option>
-            <option value="ioa">UK</option>
-            <option value="ioa">USA</option>
-        </select>
-    </form>
-
-    <form>
-        <label for="regions_select" class="heading-2">By host - regions</label>
-        <select name="regions_select" id="regions_select">
-            <option value="afr">Africa</option>
-            <option value="amn">North America</option>
-            <option value="ams">South America</option>
-            <option value="asi">Asia</option>
-            <option value="eun">Northern Europe</option>
-            <option value="eue">Eastern Europe</option>
-            <option value="euw">Western Europe</option>
-            <option value="oce">Oceania</option>
-            <option value="mid">Middle East</option>
-            <option value="ioa">Individual Olympic Athletes</option>
-        </select>
-    </form> -->
-
-
-
-    <!-- <div style="text-align: center; margin: 0 auto">
-        <button id='nation'>By Nation</button>
-        <button id='region'>By Region</button>
-    </div> -->
-
     <div id="datavis"></div>
 
-    <!-- </div> -->
-
-    <!-- <h2>Toggles:</h2>
-    <div id="toggle-btns">
-        <button id='toggle-comp'>Show total medals on offer</button>
-    </div>
-
-    <h2>Select host:</h2>
-    <div id="region-btns">
-        <button id='All-hosts'>All hosts</button>
-        <button id='Australia'>Australia</button>
-        <button id='Belgium'>Belgium</button>
-        <button id='Brazil'>Brazil</button>
-        <button id='Canada'>Canada</button>
-        <button id='China'>China</button>
-        <button id='Finland'>Finland</button>
-        <button id='France'>France</button>
-        <button id='Germany'>Germany</button>
-        <button id='Greece'>Greece</button>
-        <button id='Italy'>Italy</button>
-        <button id='Japan'>Japan</button>
-        <button id='Mexico'>Mexico</button>
-        <button id='Netherlands'>Netherlands</button>
-        <button id='Russia'>Russia</button>
-        <button id='South Korea'>South Korea</button>
-        <button id='Spain'>Spain</button>
-        <button id='Sweden'>Sweden</button>
-        <button id='UK'>UK</button>
-        <button id='USA'>USA</button>
-    </div>
-
-    <h2>Select games:</h2>
-    <div id="games-btns">
-        <button id='All-hosts'>All games</button>
-        <button id='1896'>Athens, 1896</button>
-        <button id='1900'>Paris, 1900</button>
-        <button id='1904'>St. Louis, 1904</button>
-        <button id='1906'>Athens, 1906</button>
-        <button id='1908'>London, 1908</button>
-        <button id='1912'>Stockholm, 1912</button>
-        <button id='1920'>Antwerp, 1920</button>
-        <button id='1924'>Paris, 1924</button>
-        <button id='1928'>Amsterdam, 1928</button>
-        <button id='1932'>Los Angeles, 1932</button>
-        <button id='1936'>Berlin, 1936</button>
-        <button id='1948'>London, 1948</button>
-        <button id='1952'>Helsinki, 1952</button>
-        <button id='1956'>Melbourne, 1956</button>
-        <button id='1960'>Rome, 1960</button>
-        <button id='1964'>Tokyo, 1964</button>
-        <button id='1968'>Mexico City, 1968</button>
-        <button id='1972'>Munich, 1972</button>
-        <button id='1976'>Montreal, 1976</button>
-        <button id='1980'>Moscow, 1980</button>
-        <button id='1984'>Los Angeles, 1984</button>
-        <button id='1988'>Seoul, 1988</button>
-        <button id='1992'>Barcelona, 1992</button>
-        <button id='1996'>Atlanta, 1996</button>
-        <button id='2000'>Sydney, 2000</button>
-        <button id='2004'>Athina, 2004</button>
-        <button id='2008'>Beijing, 2008</button>
-        <button id='2012'>London, 2012</button>
-        <button id='2016'>Rio de Janeiro, 2016</button>
-    </div>
-
-    <h2>Select Event Categories:</h2>
-    <div id="sport-btns">
-        <button id='All-sports'>All sports</button>
-        <button id='Swimming'>Swimming</button>
-        <button id='Wrestling'>Wrestling</button>
-        <button id='Gymnastics'>Gymnastics</button>
-        <button id='Weightlifting'>Weightlifting</button>
-        <button id='Sailing'>Sailing</button>
-        <button id='Diving'>Diving</button>
-        <button id='Archery'>Archery</button>
-        <button id='Rowing'>Rowing</button>
-        <button id='Cycling'>Cycling</button>
-        <button id='Athletics'>Athletics</button>
-    </div> -->
 
 </body>
 

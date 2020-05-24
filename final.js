@@ -41,7 +41,6 @@ function displayVis(csvData) {
         if (state == 0) {
             x_values = gamesYears;
             if (mode == 0) { // By country
-                // max_cap = 450;
                 max_cap = 450;
                 for (i = 0; i < hosts.length; i++) {
                     y_values.push(csvData[hosts_ind[i]][years[i]]);
@@ -168,18 +167,13 @@ function displayVis(csvData) {
             },
         };
 
-        console.log("setting");
         Plotly.newPlot("datavis", data, layout);
         checkTitle();
-
-
-
     }
 
     setPlot(0, 0, 0, 0);
 
     function checkTitle() {
-        // alert("checking")
         if (state == 0) {
             // Only show title-1
             document.getElementById("title-1").style.display = "block";
@@ -203,6 +197,7 @@ function displayVis(csvData) {
             document.getElementById("title-1").style.display = "none";
             document.getElementById("title-3").style.display = "none";
 
+            // Only show appropriate fill-2
             if (mode == 0) {
                 document.getElementById("title-2-nation").style.display = "block";
                 document.getElementById("title-2-region").style.display = "none";
@@ -231,13 +226,12 @@ function displayVis(csvData) {
     }
 
     document.getElementById("nations").addEventListener("click", function () {
+        host = parseInt(document.getElementById("nations-select").value);
         setPlot(0, state, host, game);
     });
 
     document.getElementById("regions").addEventListener("click", function () {
-        if (host == 0) {
-            host = 9;
-        }
+        host = parseInt(document.getElementById("regions-select").value);
         setPlot(1, state, host, game);
     });
 

@@ -21,6 +21,21 @@ h2 {
     /* text-align: center; */
 }
 
+/* .box {
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin: 5px;
+  }
+  
+  .red {
+    background: #13b4ff;
+  }
+  
+  .green {
+    background: #ab3fdd;
+  } */
+
 /***** VARIABLE TITLES *****/
 
 #fill-1-nation {
@@ -77,7 +92,7 @@ h2 {
 
 .subheading-1 {
     font-style: normal;
-    font-weight: 600;
+    font-weight: 500;
     /* margin-top: 3.1em; */
     /* padding-left: 1.5rem; */
     padding-bottom: 3rem;

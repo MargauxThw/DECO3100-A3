@@ -21,7 +21,7 @@
         <h1 class="heading-1">Host with the most</h1>
         <p class="subheading-1">Hosting the Olympic Games gave you a better shot at winning more medals than usual, and
             even helped out your neighbours. Recently hosting hasn’t had much effect on you or surrounding nations.</p>
-        </header>
+    </header>
 
     <hr>
 
@@ -49,104 +49,112 @@
         </form>
     </div>
 
-    <div id="title-1">
-        <h2>How many medals did the host </h2>
-        <h2 id="fill-1-nation">nation </h2>
-        <h2 id="fill-1-region">region </h2>
-        <h2>win?</h2>
+    <div class="wrap" style="text-align: center; padding-top: 2rem;">
+        <div id="title-1">
+            <h2>How many medals did the host </h2>
+            <h2 id="fill-1-nation">nation </h2>
+            <h2 id="fill-1-region">region </h2>
+            <h2>win?</h2>
+        </div>
+
+        <div id="title-2-nation">
+            <h2>How did hosting affect </h2>
+            <form>
+                <select name="nations_select" id="nations-select">
+                    <option value="0">Australia</option>
+                    <option value="1">Belgium</option>
+                    <option value="2">Brazil</option>
+                    <option value="3">Canada</option>
+                    <option value="4">China</option>
+                    <option value="5">Finland</option>
+                    <option value="6">France</option>
+                    <option value="7">Germany</option>
+                    <option value="8">Greece</option>
+                    <option value="9">Italy</option>
+                    <option value="10">Japan</option>
+                    <option value="11">Mexico</option>
+                    <option value="12">Netherlands</option>
+                    <option value="13">Russia</option>
+                    <option value="14">South Korea</option>
+                    <option value="15">Spain</option>
+                    <option value="16">Sweden</option>
+                    <option value="17">UK</option>
+                    <option value="18">USA</option>
+                </select>
+            </form>
+            <h2>'s medal tally?</h2>
+        </div>
+
+        <div id="title-2-region">
+            <h2>How did hosting affect </h2>
+            <form>
+                <select name="regions_select" id="regions-select">
+                    <!-- <option value="1">Africa</option> -->
+                    <option value="9">Western Europe</option>
+                    <option value="5">North America</option>
+                    <option value="8">South America</option>
+                    <option value="2">Asia</option>
+                    <option value="6">Northern Europe</option>
+                    <option value="3">Eastern Europe</option>
+                    <option value="7">Oceania</option>
+                    <!-- <option value="4">Middle East</option> -->
+                    <!-- <option value="1">Individual Olympic Athletes</option> -->
+                </select>
+            </form>
+            <h2>'s medal tally?</h2>
+        </div>
+
+        <div id="title-3">
+            <h2>What </h2>
+            <h2 id="fill-3-nation">nations </h2>
+            <h2 id="fill-3-region">regions </h2>
+            <h2> were the real winners at the </h2>
+            <form>
+                <select name="games_select" id="games-select">
+                    <option value='0'>Athens, 1896</option>
+                    <option value='1'>Paris, 1900</option>
+                    <option value='2'>St. Louis, 1904</option>
+                    <option value='3'>Athens, 1906</option>
+                    <option value='4'>London, 1908</option>
+                    <option value='5'>Stockholm, 1912</option>
+                    <option value='6'>Antwerp, 1920</option>
+                    <option value='7'>Paris, 1924</option>
+                    <option value='8'>Amsterdam, 1928</option>
+                    <option value='9'>Los Angeles, 1932</option>
+                    <option value='10'>Berlin, 1936</option>
+                    <option value='11'>London, 1948</option>
+                    <option value='12'>Helsinki, 1952</option>
+                    <option value='13'>Melbourne, 1956</option>
+                    <option value='14'>Rome, 1960</option>
+                    <option value='15'>Tokyo, 1964</option>
+                    <option value='16'>Mexico City, 1968</option>
+                    <option value='17'>Munich, 1972</option>
+                    <option value='18'>Montreal, 1976</option>
+                    <option value='19'>Moscow, 1980</option>
+                    <option value='20'>Los Angeles, 1984</option>
+                    <option value='21'>Seoul, 1988</option>
+                    <option value='22'>Barcelona, 1992</option>
+                    <option value='23'>Atlanta, 1996</option>
+                    <option value='24'>Sydney, 2000</option>
+                    <option value='25'>Athina, 2004</option>
+                    <option value='26'>Beijing, 2008</option>
+                    <option value='27'>London, 2012</option>
+                    <option value='28'>Rio de Janeiro, 2016</option>
+                </select>
+            </form>
+            <h2> Olympic Games?</h2>
+        </div>
     </div>
 
-    <div id="title-2-nation">
-        <h2>How did hosting affect </h2>
-        <form>
-            <select name="nations_select" id="nations-select">
-                <option value="0">Australia</option>
-                <option value="1">Belgium</option>
-                <option value="2">Brazil</option>
-                <option value="3">Canada</option>
-                <option value="4">China</option>
-                <option value="5">Finland</option>
-                <option value="6">France</option>
-                <option value="7">Germany</option>
-                <option value="8">Greece</option>
-                <option value="9">Italy</option>
-                <option value="10">Japan</option>
-                <option value="11">Mexico</option>
-                <option value="12">Netherlands</option>
-                <option value="13">Russia</option>
-                <option value="14">South Korea</option>
-                <option value="15">Spain</option>
-                <option value="16">Sweden</option>
-                <option value="17">UK</option>
-                <option value="18">USA</option>
-            </select>
-        </form>
-        <h2>'s medal tally?</h2>
-    </div>
-
-    <div id="title-2-region">
-        <h2>How did hosting affect </h2>
-        <form>
-            <select name="regions_select" id="regions-select">
-                <!-- <option value="1">Africa</option> -->
-                <option value="9">Western Europe</option>
-                <option value="5">North America</option>
-                <option value="8">South America</option>
-                <option value="2">Asia</option>
-                <option value="6">Northern Europe</option>
-                <option value="3">Eastern Europe</option>
-                <option value="7">Oceania</option>
-                <!-- <option value="4">Middle East</option> -->
-                <!-- <option value="1">Individual Olympic Athletes</option> -->
-            </select>
-        </form>
-        <h2>'s medal tally?</h2>
-    </div>
-
-    <div id="title-3">
-        <h2>What </h2> 
-        <h2 id="fill-3-nation">nations </h2>
-        <h2 id="fill-3-region">regions </h2>
-        <h2> were the real winners at the </h2>
-        <form>
-            <select name="games_select" id="games-select">
-                <option value='0'>Athens, 1896</option>
-                <option value='1'>Paris, 1900</option>
-                <option value='2'>St. Louis, 1904</option>
-                <option value='3'>Athens, 1906</option>
-                <option value='4'>London, 1908</option>
-                <option value='5'>Stockholm, 1912</option>
-                <option value='6'>Antwerp, 1920</option>
-                <option value='7'>Paris, 1924</option>
-                <option value='8'>Amsterdam, 1928</option>
-                <option value='9'>Los Angeles, 1932</option>
-                <option value='10'>Berlin, 1936</option>
-                <option value='11'>London, 1948</option>
-                <option value='12'>Helsinki, 1952</option>
-                <option value='13'>Melbourne, 1956</option>
-                <option value='14'>Rome, 1960</option>
-                <option value='15'>Tokyo, 1964</option>
-                <option value='16'>Mexico City, 1968</option>
-                <option value='17'>Munich, 1972</option>
-                <option value='18'>Montreal, 1976</option>
-                <option value='19'>Moscow, 1980</option>
-                <option value='20'>Los Angeles, 1984</option>
-                <option value='21'>Seoul, 1988</option>
-                <option value='22'>Barcelona, 1992</option>
-                <option value='23'>Atlanta, 1996</option>
-                <option value='24'>Sydney, 2000</option>
-                <option value='25'>Athina, 2004</option>
-                <option value='26'>Beijing, 2008</option>
-                <option value='27'>London, 2012</option>
-                <option value='28'>Rio de Janeiro, 2016</option>
-            </select>
-        </form>
-        <h2> Olympic Games?</h2>
-    </div>
+    <!-- <div><div class='box red'></div> Host medal tally</div>
+    <br>
+<div><div class='box green'></div> Non-host medal tally</div>
+<br> -->
 
     <div id="datavis"></div>
 
-    <p class="data-source">Data from: https://www.kaggle.com/heesoo37/120-years-of-olympic-history-athletes-and-results</p>
+    <p class="data-source">Data from: https://www.kaggle.com/heesoo37/120-years-of-olympic-history-athletes-and-results
+    </p>
 
 </body>
 

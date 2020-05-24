@@ -26,12 +26,14 @@ function displayVis(csvData) {
         max_cap = 0;
 
         if (state == 2) {
+            text_labels = [];
             if (mode == 0) {
                 x_title = "Top 10 medal winning nations this year"
             } else {
                 x_title = "Regions"
             }
         } else {
+            text_labels = host_labels;
             x_title = "Olympic Games (host city, year)"
         }
 
@@ -122,7 +124,7 @@ function displayVis(csvData) {
             name: "",
             x: x_values,
             y: y_values,
-            // text: host_labels,
+            text: text_labels,
             type: "bar",
             marker: {
                 color: colours,
@@ -133,14 +135,16 @@ function displayVis(csvData) {
 
         layout = {
             showlegend: false,
-            
             hovermode: "closest",
             font: {
                 family: 'Cabin',
                 size: 16,
             },
             hoverlabel: {
-                bordercolor: "white",
+                font: {
+                    family: 'Cabin',
+                    size: 14,
+                },
             },
             height: 800,
             xaxis: {

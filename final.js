@@ -25,6 +25,16 @@ function displayVis(csvData) {
         colours = [];
         max_cap = 0;
 
+        if (state == 2) {
+            if (mode == 0) {
+                x_title = "Top 10 medal winning nations this year"
+            } else {
+                x_title = "Regions"
+            }
+        } else {
+            x_title = "Olympic Games (host city, year)"
+        }
+
         // Level 1: Overall host graph
         if (state == 0) {
             x_values = gamesYears;
@@ -33,13 +43,13 @@ function displayVis(csvData) {
                 max_cap = 450;
                 for (i = 0; i < hosts.length; i++) {
                     y_values.push(csvData[hosts_ind[i]][years[i]]);
-                    colours.push('rgba(222,45,38,0.8)');
+                    colours.push('#EE334E');
                 }
             } else { // By region
                 max_cap = 820;
                 for (i = 0; i < hosts.length; i++) {
                     y_values.push(csvData[20 + host_regions[i]][years[i]]);
-                    colours.push('rgba(222,45,38,0.8)');
+                    colours.push('#EE334E');
                 }
             }
         }
@@ -53,7 +63,7 @@ function displayVis(csvData) {
                     y_values.push(csvData[host][years[i]]);
     
                     if (host == hosts_ind[i]) {
-                        colours.push("rgba(222,45,38,0.8)");
+                        colours.push("#EE334E");
                     } else {
                         colours.push("rgba(204,204,204,1)");
                     }
@@ -64,7 +74,7 @@ function displayVis(csvData) {
                     y_values.push(csvData[20 + host][years[i]]);
 
                     if (host == host_regions[i]) {
-                        colours.push("rgba(222,45,38,0.8)");
+                        colours.push("#EE334E");
                     } else {
                         colours.push("rgba(204,204,204,1)");
                     }
@@ -87,7 +97,7 @@ function displayVis(csvData) {
 
                 for (i = 0; i < participating.length; i++) {
                     if (participating[i].Region === hosts[game]) {
-                        colours.push('rgba(222,45,38,0.8)');
+                        colours.push('#EE334E');
                     } else {
                         colours.push('rgba(204,204,204,1)');
                     }
@@ -100,7 +110,7 @@ function displayVis(csvData) {
                 for (i = 0; i < regions.length; i++) {
                     y_values.push(csvData[20 + i][years[game]]);
                     if (i == host_regions[game]) {
-                        colours.push('rgba(222,45,38,0.8)');
+                        colours.push('#EE334E');
                     } else {
                         colours.push('rgba(204,204,204,1)');
                     }
@@ -123,18 +133,33 @@ function displayVis(csvData) {
 
         layout = {
             showlegend: false,
+            
             hovermode: "closest",
+            font: {
+                family: 'Cabin',
+                size: 16,
+            },
             hoverlabel: {
                 bordercolor: "white",
             },
             height: 800,
             xaxis: {
+                title: {
+                    text: x_title,
+                    standoff: 30,
+                },
+                showgrid: false,
                 ticks: "outside",
                 tickangle: -45,
                 automargin: true,
+                
             },
             yaxis: {
-                // range: [0, max_val + 50 - (+max_val % 50)],
+                title: {
+                    text: "Total medals won",
+                    standoff: 30,
+                },
+                showgrid: false,
                 range: [0, max_cap],
             },
         };
@@ -142,6 +167,7 @@ function displayVis(csvData) {
         console.log("setting");
         Plotly.newPlot("datavis", data, layout);
         checkTitle();
+
 
 
     }

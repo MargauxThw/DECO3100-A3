@@ -50,8 +50,6 @@ ul {
     background-color: rgba(204, 204, 204, 1);
 }
 
-/***** VARIABLE TITLES *****/
-
 #fill-1-nation {
     color: #00A651;
     text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
@@ -230,7 +228,6 @@ select {
     font-weight: bolder;
     border: 1px solid rgba(0, 0, 0, 0.12);
     padding-left: 1rem;
-    /* margin: 0 auto; */
     border-radius: 3rem;
     outline: none;
 }

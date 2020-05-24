@@ -1,4 +1,4 @@
-Plotly.d3.csv("data/final.csv", displayVis);
+Plotly.d3.csv("yearly_medals.csv", displayVis);
 
 function displayVis(csvData) {
     hosts = ['Greece', 'France', 'USA', 'Greece', 'UK', 'Sweden', 'Belgium', 'France', 'Netherlands', 'USA', 'Germany', 'UK', 'Finland', 'Australia', 'Italy', 'Japan', 'Mexico', 'Germany', 'Canada', 'Russia', 'USA', 'South Korea', 'Spain', 'USA', 'Australia', 'Greece', 'China', 'UK', 'Brazil'];
@@ -9,22 +9,20 @@ function displayVis(csvData) {
     regions = ["Individual Olympic Athletes", "Africa", "Asia", "Eastern Europe", "Middle East", "North America", "Northern Europe", "Oceania", "South America", "Western Europe"];
     host_regions = [9, 9, 5, 9, 9, 6, 9, 9, 9, 5, 9, 9, 6, 7, 9, 2, 5, 9, 5, 3, 5, 2, 9, 5, 7, 9, 2, 9, 8];
 
-    state = 0;
-    host = 0;
-    game = 0;
-    mode = 0;
-
     function setPlot(this_mode, this_state, this_host, this_game) {
+        // Initialise parameter values
         mode = this_mode;
         state = this_state;
         host = this_host;
         game = this_game;
 
+        // Initialise arrays for axes values & bar colours
         y_values = [];
         x_values = [];
         colours = [];
-        max_cap = 0;
+        upper_y_bound = 0;
 
+        // Adjust x axes label
         if (state == 2) {
             text_labels = [];
             if (mode == 0) {
@@ -41,13 +39,13 @@ function displayVis(csvData) {
         if (state == 0) {
             x_values = gamesYears;
             if (mode == 0) { // By country
-                max_cap = 450;
+                upper_y_bound = 450;
                 for (i = 0; i < hosts.length; i++) {
                     y_values.push(csvData[hosts_ind[i]][years[i]]);
                     colours.push('#EE334E');
                 }
             } else { // By region
-                max_cap = 820;
+                upper_y_bound = 820;
                 for (i = 0; i < hosts.length; i++) {
                     y_values.push(csvData[20 + host_regions[i]][years[i]]);
                     colours.push('#EE334E');
@@ -59,7 +57,7 @@ function displayVis(csvData) {
         if (state == 1) {
             x_values = gamesYears;
             if (mode == 0) { // By country
-                max_cap = 450;
+                upper_y_bound = 450;
                 for (i = 0; i < years.length; i++) {    
                     y_values.push(csvData[host][years[i]]);
     
@@ -70,7 +68,7 @@ function displayVis(csvData) {
                     }
                 }
             } else { // By region
-                max_cap = 820;
+                upper_y_bound = 820;
                 for (i = 0; i < years.length; i++) {   
                     y_values.push(csvData[20 + host][years[i]]);
 
@@ -87,8 +85,9 @@ function displayVis(csvData) {
         // Level 3: Focus on one games - showing each region/top country's performance
         if (state == 2) {
             if (mode == 0) { // By country
-                max_cap = 450;
+                upper_y_bound = 450;
 
+                // Get top 10 medal winning countries
                 participating = csvData.slice(30);
                 participating.sort((b, a) => a[years[game]] - b[years[game]]);
                 participating = participating.slice(0, 10);
@@ -100,20 +99,21 @@ function displayVis(csvData) {
                     if (participating[i].Region === hosts[game]) {
                         colours.push('#EE334E');
                     } else {
-                        colours.push('rgba(204,204,204,1)');
+                        colours.push('rgb(204,204,204)');
                     }
                 }
 
 
             } else { // By region
                 x_values = regions;
-                max_cap = 820;
+                upper_y_bound = 820;
                 for (i = 0; i < regions.length; i++) {
                     y_values.push(csvData[20 + i][years[game]]);
+
                     if (i == host_regions[game]) {
                         colours.push('#EE334E');
                     } else {
-                        colours.push('rgba(204,204,204,1)');
+                        colours.push('rgb(204,204,204)');
                     }
                 }
             }
@@ -163,7 +163,7 @@ function displayVis(csvData) {
                     standoff: 30,
                 },
                 showgrid: false,
-                range: [0, max_cap],
+                range: [0, upper_y_bound],
             },
         };
 
@@ -224,6 +224,8 @@ function displayVis(csvData) {
             }
         }
     }
+
+    /* FILTERS */
 
     document.getElementById("nations").addEventListener("click", function () {
         host = parseInt(document.getElementById("nations-select").value);

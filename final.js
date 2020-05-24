@@ -30,13 +30,13 @@ function displayVis(csvData) {
             x_values = gamesYears;
             if (mode == 0) { // By country
                 // max_cap = 450;
-                max_cap = 650;
+                max_cap = 450;
                 for (i = 0; i < hosts.length; i++) {
                     y_values.push(csvData[hosts_ind[i]][years[i]]);
                     colours.push('rgba(222,45,38,0.8)');
                 }
             } else { // By region
-                max_cap = 650;
+                max_cap = 820;
                 for (i = 0; i < hosts.length; i++) {
                     y_values.push(csvData[20 + host_regions[i]][years[i]]);
                     colours.push('rgba(222,45,38,0.8)');
@@ -59,7 +59,7 @@ function displayVis(csvData) {
                     }
                 }
             } else { // By region
-                max_cap = 650;
+                max_cap = 820;
                 for (i = 0; i < years.length; i++) {   
                     y_values.push(csvData[20 + host][years[i]]);
 
@@ -77,7 +77,7 @@ function displayVis(csvData) {
         if (state == 2) {
             if (mode == 0) { // By country
                 max_cap = 450;
-                
+
                 participating = csvData.slice(30);
                 participating.sort((b, a) => a[years[game]] - b[years[game]]);
                 participating = participating.slice(0, 10);
@@ -96,7 +96,7 @@ function displayVis(csvData) {
 
             } else { // By region
                 x_values = regions;
-                max_cap = 650;
+                max_cap = 820;
                 for (i = 0; i < regions.length; i++) {
                     y_values.push(csvData[20 + i][years[game]]);
                     if (i == host_regions[game]) {
@@ -127,7 +127,7 @@ function displayVis(csvData) {
             hoverlabel: {
                 bordercolor: "white",
             },
-            height: 700,
+            height: 800,
             xaxis: {
                 ticks: "outside",
                 tickangle: -45,

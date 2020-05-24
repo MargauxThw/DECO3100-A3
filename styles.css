@@ -21,20 +21,19 @@ h2 {
     /* text-align: center; */
 }
 
-/* .box {
-    float: left;
-    width: 20px;
-    height: 20px;
-    margin: 5px;
-  }
-  
-  .red {
-    background: #13b4ff;
-  }
-  
-  .green {
-    background: #ab3fdd;
-  } */
+/* basic positioning */
+ul {
+    width: 350px;
+    margin: auto;
+    font-weight: 600;
+}
+
+.legend { list-style: none; }
+.legend li { float: left; margin-right: 10px; }
+.legend span { border: none; float: left; width: 12px; height: 12px; margin: 2px; }
+/* your colors */
+.legend .host-medals { background-color: rgba(222,45,38,0.8); }
+.legend .non-host-medals { background-color: rgba(204,204,204,1); }
 
 /***** VARIABLE TITLES *****/
 

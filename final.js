@@ -10,7 +10,7 @@ function displayVis(csvData) {
     host_regions = [9, 9, 5, 9, 9, 6, 9, 9, 9, 5, 9, 9, 6, 7, 9, 2, 5, 9, 5, 3, 5, 2, 9, 5, 7, 9, 2, 9, 8];
 
     state = 0;
-    host = 0;
+    host = 9;
     game = 0;
     mode = 0;
 
@@ -60,9 +60,9 @@ function displayVis(csvData) {
                 }
             } else { // By region
                 max_cap = 650;
-                for (i = 0; i < years.length; i++) {    
-                    y_values.push(csvData[20 + host_regions[i]][years[i]]);
-    
+                for (i = 0; i < years.length; i++) {   
+                    y_values.push(csvData[20 + host][years[i]]);
+
                     if (host == host_regions[i]) {
                         colours.push("rgba(222,45,38,0.8)");
                     } else {
@@ -77,9 +77,11 @@ function displayVis(csvData) {
         if (state == 2) {
             if (mode == 0) { // By country
                 max_cap = 450;
+                
                 participating = csvData.slice(30);
                 participating.sort((b, a) => a[years[game]] - b[years[game]]);
                 participating = participating.slice(0, 10);
+
                 x_values = participating.map((row) => row.Region);
                 y_values = participating.map((row) => row[years[game]]);
 
@@ -137,14 +139,14 @@ function displayVis(csvData) {
             },
         };
 
-
+        console.log("setting");
         Plotly.newPlot("datavis", data, layout);
         checkTitle();
 
 
     }
 
-    setPlot(0, 0, 0, 0);
+    setPlot(0, 0, 9, 0);
 
     function checkTitle() {
         // alert("checking")
@@ -216,6 +218,21 @@ function displayVis(csvData) {
 
     document.getElementById("by_games").addEventListener("click", function () {
         setPlot(mode, 2, host, game);
+    });
+
+    /* DROPDOWNS */
+
+    document.getElementById("nations-select").addEventListener("change", function () {
+        setPlot(mode, state, parseInt(document.getElementById("nations-select").value), game);
+    });
+
+    document.getElementById("regions-select").addEventListener("change", function () {
+        console.log(parseInt(document.getElementById("regions-select").value))
+        setPlot(mode, state, parseInt(document.getElementById("regions-select").value), game);
+    });
+
+    document.getElementById("games-select").addEventListener("change", function () {
+        setPlot(mode, state, host, parseInt(document.getElementById("games-select").value));
     });
 
 }

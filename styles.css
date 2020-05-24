@@ -72,13 +72,19 @@ h2 {
 
 .subheading-1 {
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     /* margin-top: 3.1em; */
     /* padding-left: 1.5rem; */
     flex: 7;
     margin-top: 0;
+    
+}
+
+.data-source {
+    font-style: italic;
     padding-bottom: 3rem;
     width: 70%;
+    font-weight: 500;
 }
 
 header {

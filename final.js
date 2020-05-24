@@ -10,7 +10,7 @@ function displayVis(csvData) {
     host_regions = [9, 9, 5, 9, 9, 6, 9, 9, 9, 5, 9, 9, 6, 7, 9, 2, 5, 9, 5, 3, 5, 2, 9, 5, 7, 9, 2, 9, 8];
 
     state = 0;
-    host = 9;
+    host = 0;
     game = 0;
     mode = 0;
 
@@ -176,7 +176,7 @@ function displayVis(csvData) {
 
     }
 
-    setPlot(0, 0, 9, 0);
+    setPlot(0, 0, 0, 0);
 
     function checkTitle() {
         // alert("checking")
@@ -235,6 +235,9 @@ function displayVis(csvData) {
     });
 
     document.getElementById("regions").addEventListener("click", function () {
+        if (host == 0) {
+            host = 9;
+        }
         setPlot(1, state, host, game);
     });
 
@@ -257,7 +260,6 @@ function displayVis(csvData) {
     });
 
     document.getElementById("regions-select").addEventListener("change", function () {
-        console.log(parseInt(document.getElementById("regions-select").value))
         setPlot(mode, state, parseInt(document.getElementById("regions-select").value), game);
     });
 

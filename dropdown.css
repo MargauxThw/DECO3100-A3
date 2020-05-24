@@ -30,6 +30,18 @@ h2 {
     display: none;
 }
 
+#fill-3-nation {
+    color: #00A651;
+    -webkit-text-stroke: 1px black;
+    display: none;
+}
+
+#fill-3-region {
+    color: #FCB131;
+    -webkit-text-stroke: 1px black;
+    display: none;
+}
+
 #title-1 {
     display: block;
 }

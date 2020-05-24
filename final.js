@@ -12,6 +12,7 @@ function displayVis(csvData) {
     state = 0;
     host = 0;
     game = 0;
+    mode = 0;
 
     function setPlot(this_mode, this_state, this_host, this_game) {
         mode = this_mode;
@@ -47,7 +48,8 @@ function displayVis(csvData) {
         if (state == 1) {
             x_values = gamesYears;
             if (mode == 0) { // By country
-                for (i = 0; i < games.length; i++) {    
+                max_cap = 450;
+                for (i = 0; i < years.length; i++) {    
                     y_values.push(csvData[host][years[i]]);
     
                     if (host == hosts_ind[i]) {
@@ -57,10 +59,11 @@ function displayVis(csvData) {
                     }
                 }
             } else { // By region
-                for (i = 0; i < games.length; i++) {    
+                max_cap = 650;
+                for (i = 0; i < years.length; i++) {    
                     y_values.push(csvData[20 + host_regions[i]][years[i]]);
     
-                    if (host == hosts_regions[i]) {
+                    if (host == host_regions[i]) {
                         colours.push("rgba(222,45,38,0.8)");
                     } else {
                         colours.push("rgba(204,204,204,1)");
@@ -93,7 +96,7 @@ function displayVis(csvData) {
                 x_values = regions;
                 max_cap = 650;
                 for (i = 0; i < regions.length; i++) {
-                    values.push(csvData[20 + i][years[game]]);
+                    y_values.push(csvData[20 + i][years[game]]);
                     if (i == host_regions[game]) {
                         colours.push('rgba(222,45,38,0.8)');
                     } else {
@@ -136,11 +139,12 @@ function displayVis(csvData) {
 
 
         Plotly.newPlot("datavis", data, layout);
+        checkTitle();
+
 
     }
 
     setPlot(0, 0, 0, 0);
-    checkTitle();
 
     function checkTitle() {
         // alert("checking")
@@ -160,34 +164,58 @@ function displayVis(csvData) {
                 document.getElementById("fill-1-region").style.display = "inline";
             }
 
+        }
 
+        if (state == 1) {
+            // Only show appropriate title-2
+            document.getElementById("title-1").style.display = "none";
+            document.getElementById("title-3").style.display = "none";
+
+            if (mode == 0) {
+                document.getElementById("title-2-nation").style.display = "block";
+                document.getElementById("title-2-region").style.display = "none";
+            } else {
+                document.getElementById("title-2-nation").style.display = "none";
+                document.getElementById("title-2-region").style.display = "block";
+            }
+        }
+
+        if (state == 2) {
+            // Only show title-3
+            document.getElementById("title-1").style.display = "none";
+            document.getElementById("title-2-nation").style.display = "none";
+            document.getElementById("title-2-region").style.display = "none";
+            document.getElementById("title-3").style.display = "block";
+
+            // Only show appropriate fill-3
+            if (mode == 0) {
+                document.getElementById("fill-3-nation").style.display = "inline";
+                document.getElementById("fill-3-region").style.display = "none";
+            } else {
+                document.getElementById("fill-3-nation").style.display = "none";
+                document.getElementById("fill-3-region").style.display = "inline";
+            }
         }
     }
 
     document.getElementById("nations").addEventListener("click", function () {
         setPlot(0, state, host, game);
-        checkTitle();
-        
-        // setPlot(0, 2, host, 0);
     });
 
     document.getElementById("regions").addEventListener("click", function () {
         setPlot(1, state, host, game);
-        checkTitle();
-
     });
 
     document.getElementById("overall").addEventListener("click", function () {
-        setPlot(1, state, host, game);
+        setPlot(mode, 0, host, game);
     });
 
     document.getElementById("by_host").addEventListener("click", function () {
-        setPlot(1, state, host, game);
+        setPlot(mode, 1, host, game);
     });
 
     document.getElementById("by_games").addEventListener("click", function () {
-        alert("by games")
-        setPlot(1, state, host, game);
+        setPlot(mode, 2, host, game);
     });
 
 }

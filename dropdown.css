@@ -8,6 +8,27 @@ body {
     color: rgba(0, 0, 0, 0.87);
 }
 
+h2 {
+    display: inline;
+    font-weight: bolder;
+    font-size: 3rem;
+    /* margin-top: 2rem; */
+    /* text-align: center; */
+}
+
+#fill-1-nation {
+    color: #00A651;
+    -webkit-text-stroke: 1px black;
+    display: inline;
+}
+
+#fill-1-region {
+    color: #FCB131;
+    -webkit-text-stroke: 1px black;
+    display: none;
+}
+
+
 .heading-1 {
     font-style: normal;
     font-weight: bold;
@@ -58,15 +79,6 @@ form {
     /* justify-items: right; */
     /* width: 100%; */
 }
-
-/* #type-select {
-    flex: 1;
-}
-#story-select {
-    flex: 1;
-} */
-
-/* .first-two{ width: 100%; text-align:justify; display:flex; flex-direction:column; align-items:center; justify-content:center; } */
 
 fieldset {
     /* flex: 0;
@@ -127,12 +139,16 @@ input[type="radio"]:hover+.chip {
 
 input[type="radio"]:hover+.chip--yellow {
     background: #FCB131;
-    color: #000;
+    /* color: #000; */
+    color: #fff;
+
 }
 
 input[type="radio"]:checked+.chip--yellow {
     background: #FCB131;
-    color: #000;
+    /* color: #000; */
+    color: #fff;
+
 }
 
 input[type="radio"]:hover+.chip--green {
@@ -146,13 +162,16 @@ input[type="radio"]:checked+.chip--green {
 }
 
 select {
-    font-family: "Cabin";
-    font-size: 1.5rem;
-    display: flex;
+    /* font-family: "Cabin"; */
+    font-size: 2rem;
+    font-weight: normal;
+    /* display: flex; */
     justify-content: center;
     align-items: center;
     border: 1px solid rgba(0, 0, 0, 0.12);
-    padding: .5rem;
-    margin: 1rem .5rem;
+    padding: 0rem 1rem 0rem 1rem;
+    /* margin: 0.8rem 0rem 1rem .5rem; */
     border-radius: 3rem;
+    height: 55px;
+    outline: none;
 }

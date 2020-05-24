@@ -30,9 +30,9 @@
 
             <fieldset id="type-select">
                 <input type="radio" name="host_type" id="nations" value="nations" checked>
-                <label for="nations" class="chip chip--green">Nations</label>
+                <label for="nations" class="chip chip--green">By Nation</label>
                 <input type="radio" name="host_type" id="regions" value="regions">
-                <label for="regions" class="chip chip--yellow">Regions</label>
+                <label for="regions" class="chip chip--yellow">By Region</label>
             </fieldset>
             <legend class="heading-2">Select story line:</legend>
 
@@ -48,8 +48,104 @@
         </form>
     </div>
 
+    <div class="title-1">
+        <h2>How many medals did the host </h2>
+        <h2 id="fill-1-nation">nation </h2>
+        <h2 id="fill-1-region">region </h2>
+        <h2>win?</h2>
+    </div>
 
-    <form>
+    <div class="title-2-nation">
+        <h2>How did hosting affect </h2>
+        <form>
+            <!-- <label for="nations_select" class="heading-2">By host - nations</label> -->
+            <select name="nations_select" id="nations-select">
+                <option value="aus">Australia</option>
+                <option value="amn">Belgium</option>
+                <option value="ams">Brazil</option>
+                <option value="asi">Canada</option>
+                <option value="eun">China</option>
+                <option value="eue">Finland</option>
+                <option value="euw">France</option>
+                <option value="oce">Germany</option>
+                <option value="mid">Greece</option>
+                <option value="ioa">Italy</option>
+                <option value="ioa">Japan</option>
+                <option value="ioa">Italy</option>
+                <option value="ioa">Mexico</option>
+                <option value="ioa">Netherlands</option>
+                <option value="ioa">Russia</option>
+                <option value="ioa">South Korea</option>
+                <option value="ioa">Spain</option>
+                <option value="ioa">Sweden</option>
+                <option value="ioa">UK</option>
+                <option value="ioa">USA</option>
+            </select>
+        </form>
+        <h2>'s medal tally?</h2>
+    </div>
+
+    <div class="title-2-region">
+        <h2>How did hosting affect </h2>
+        <form>
+            <select name="regions_select" id="regions_select">
+                <option value="afr">Africa</option>
+                <option value="amn">North America</option>
+                <option value="ams">South America</option>
+                <option value="asi">Asia</option>
+                <option value="eun">Northern Europe</option>
+                <option value="eue">Eastern Europe</option>
+                <option value="euw">Western Europe</option>
+                <option value="oce">Oceania</option>
+                <option value="mid">Middle East</option>
+                <option value="ioa">Individual Olympic Athletes</option>
+            </select>
+        </form>
+        <h2>'s medal tally?</h2>
+    </div>
+
+    <div class="title-3">
+        <h2>Who were the real winners at the </h2>
+        <form>
+            <select name="games_select" id="games_select">
+                <option value="afr">Athina, 1896</option>
+                <option value="amn">Paris, 1900</option>
+                <option value='1896'>Athens, 1896</option>
+                <option value='1900'>Paris, 1900</option>
+                <option value='1904'>St. Louis, 1904</option>
+                <option value='1906'>Athens, 1906</option>
+                <option value='1908'>London, 1908</option>
+                <option value='1912'>Stockholm, 1912</option>
+                <option value='1920'>Antwerp, 1920</option>
+                <option value='1924'>Paris, 1924</option>
+                <option value='1928'>Amsterdam, 1928</option>
+                <option value='1932'>Los Angeles, 1932</option>
+                <option value='1936'>Berlin, 1936</option>
+                <option value='1948'>London, 1948</option>
+                <option value='1952'>Helsinki, 1952</option>
+                <option value='1956'>Melbourne, 1956</option>
+                <option value='1960'>Rome, 1960</option>
+                <option value='1964'>Tokyo, 1964</option>
+                <option value='1968'>Mexico City, 1968</option>
+                <option value='1972'>Munich, 1972</option>
+                <option value='1976'>Montreal, 1976</option>
+                <option value='1980'>Moscow, 1980</option>
+                <option value='1984'>Los Angeles, 1984</option>
+                <option value='1988'>Seoul, 1988</option>
+                <option value='1992'>Barcelona, 1992</option>
+                <option value='1996'>Atlanta, 1996</option>
+                <option value='2000'>Sydney, 2000</option>
+                <option value='2004'>Athina, 2004</option>
+                <option value='2008'>Beijing, 2008</option>
+                <option value='2012'>London, 2012</option>
+                <option value='2016'>Rio de Janeiro, 2016</option>
+            </select>
+        </form>
+        <h2> Olympic Games?</h2>
+    </div>
+
+
+    <!-- <form>
         <label for="nations_select" class="heading-2">By host - nations</label>
         <select name="nations_select" id="nations_select">
             <option value="aus">Australia</option>
@@ -89,7 +185,7 @@
             <option value="mid">Middle East</option>
             <option value="ioa">Individual Olympic Athletes</option>
         </select>
-    </form>
+    </form> -->
 
 
 

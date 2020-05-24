@@ -16,6 +16,8 @@ h2 {
     /* text-align: center; */
 }
 
+/***** VARIABLE TITLES *****/
+
 #fill-1-nation {
     color: #00A651;
     -webkit-text-stroke: 1px black;
@@ -25,6 +27,22 @@ h2 {
 #fill-1-region {
     color: #FCB131;
     -webkit-text-stroke: 1px black;
+    display: none;
+}
+
+#title-1 {
+    display: block;
+}
+
+#title-2-nation {
+    display: none;
+}
+
+#title-2-region {
+    display: none;
+}
+
+#title-3 {
     display: none;
 }
 

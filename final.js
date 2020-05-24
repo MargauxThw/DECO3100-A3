@@ -134,18 +134,59 @@ function displayVis(csvData) {
             },
         };
 
+
         Plotly.newPlot("datavis", data, layout);
 
     }
 
-    setPlot(1, 0, 0, 0);
+    setPlot(0, 0, 0, 0);
+    checkTitle();
 
-    document.getElementById("nation").addEventListener("click", function () {
+    function checkTitle() {
+        // alert("checking")
+        if (state == 0) {
+            // Only show title-1
+            document.getElementById("title-1").style.display = "block";
+            document.getElementById("title-2-nation").style.display = "none";
+            document.getElementById("title-2-region").style.display = "none";
+            document.getElementById("title-3").style.display = "none";
+
+            // Only show appropriate fill-1
+            if (mode == 0) {
+                document.getElementById("fill-1-nation").style.display = "inline";
+                document.getElementById("fill-1-region").style.display = "none";
+            } else {
+                document.getElementById("fill-1-nation").style.display = "none";
+                document.getElementById("fill-1-region").style.display = "inline";
+            }
+
+
+        }
+    }
+
+    document.getElementById("nations").addEventListener("click", function () {
         setPlot(0, state, host, game);
+        checkTitle();
+        
         // setPlot(0, 2, host, 0);
     });
 
-    document.getElementById("region").addEventListener("click", function () {
+    document.getElementById("regions").addEventListener("click", function () {
+        setPlot(1, state, host, game);
+        checkTitle();
+
+    });
+
+    document.getElementById("overall").addEventListener("click", function () {
+        setPlot(1, state, host, game);
+    });
+
+    document.getElementById("by_host").addEventListener("click", function () {
+        setPlot(1, state, host, game);
+    });
+
+    document.getElementById("by_games").addEventListener("click", function () {
+        alert("by games")
         setPlot(1, state, host, game);
     });
 
